@@ -1,0 +1,4 @@
+data/players/*.csv
+data/shots/*.csv
+data/*.csv
+data/*.zip
