@@ -18,7 +18,6 @@ async function GetStats() {
         'BLK%': d3.max(data, d => parseFloat(d['BLK%'])),
         'TOV%': d3.max(data, d => parseFloat(d['TOV%'])),
         'USG%': d3.max(data, d => parseFloat(d['USG%'])),
-        'WS': d3.max(data, d => parseFloat(d['WS'])),
         'BPM': d3.max(data, d => parseFloat(d['BPM']))
     };
 
@@ -151,7 +150,6 @@ function DrawRadarChart() {
         'BLK%': "Block Percentage: An estimate of the percentage of opponent two-point field goal attempts blocked by the player while they were on the floor.",
         'TOV%': "Turnover Percentage: An estimate of turnovers committed per 100 plays.",
         'USG%': "Usage Percentage: An estimate of the percentage of team plays used by a player while they were on the floor.",
-        'WS': "Win Shares: An estimate of the number of wins contributed by a player.",
         'BPM': "Box Plus/Minus: A box score estimate of the points per 100 possessions a player contributed above a league-average player, translated to an average team."
     };
     // Extract relevant stats for radar chart
@@ -163,7 +161,6 @@ function DrawRadarChart() {
         'BLK%': parseFloat(playerStats['BLK%']),
         'TOV%': parseFloat(playerStats['TOV%']),
         'USG%': parseFloat(playerStats['USG%']),
-        'WS': parseFloat(playerStats['WS']),
         'BPM': parseFloat(playerStats['BPM'])
     };
     const bpmRange = Math.max(Math.abs(d3.min(stats, d => parseFloat(d['BPM']))), Math.abs(d3.max(stats, d => parseFloat(d['BPM']))));
