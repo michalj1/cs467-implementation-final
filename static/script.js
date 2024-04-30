@@ -191,7 +191,7 @@ function DrawRadarChart() {
         'BPM': playerStats['BPM']
     };
     const bpmRange = Math.max(Math.abs(d3.min(stats, d => parseFloat(d['BPM']))), Math.abs(d3.max(stats, d => parseFloat(d['BPM']))));
-    const realisticMaxBLK = 10; 
+    const realisticMaxBLK = 5; 
     const realisticMaxSTL = 3; 
     // Adjust normalization for each stat
     Object.keys(maxStats).forEach(key => {
