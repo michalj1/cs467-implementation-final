@@ -223,7 +223,21 @@ function DrawRadarChart() {
     const allAxis = Object.keys(radarStats);
     const total = allAxis.length;
     const radius = Math.min(radarChartOptions.w / 2, radarChartOptions.h / 2);
-
+    // Draw the levels
+    for (let level = 0; level < radarChartOptions.levels; level++) {
+        const factor = level / radarChartOptions.levels;
+        svg.selectAll(".levels")
+            .data(new Array(360))  // 360 degrees for a full circle
+            .enter()
+            .append("line")
+            .attr("x1", (d, i) => (factor * radarChartOptions.w / 2) * Math.cos((i * Math.PI) / 180))
+            .attr("y1", (d, i) => (factor * radarChartOptions.h / 2) * Math.sin((i * Math.PI) / 180))
+            .attr("x2", (d, i) => (factor * radarChartOptions.w / 2) * Math.cos(((i + 1) * Math.PI) / 180))
+            .attr("y2", (d, i) => (factor * radarChartOptions.h / 2) * Math.sin(((i + 1) * Math.PI) / 180))
+            .attr("stroke", "grey")
+            .attr("stroke-opacity", "0.75")
+            .attr("stroke-width", "0.5");
+    }
     // Draw radar chart axes
     const axisGrid = svg.append("g").attr("class", "axisWrapper");
     const axis = axisGrid.selectAll(".axis")
