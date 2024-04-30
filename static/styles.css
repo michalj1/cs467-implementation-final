@@ -2,6 +2,21 @@ body {
     text-align: center;
 }
 
+#selectors {
+    margin-bottom: 20px;
+}
+
+.visualizations {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.visualization {
+    margin: 0 20px; /* Adds spacing between the visualizations */
+}
+
 #tooltip {
     position: absolute;
     display: none;
@@ -10,4 +25,9 @@ body {
     color: #fff;
     border-radius: 5px;
     font-size: 12px;
+}
+
+#shot_container, #radar_chart {
+    width: 500px; /* Set a specific width for each container */
+    height: 300px; /* Set a specific height for each container */
 }

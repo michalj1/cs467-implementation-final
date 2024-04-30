@@ -168,10 +168,13 @@ function DrawRadarChart() {
     };
     const bpmRange = Math.max(Math.abs(d3.min(stats, d => parseFloat(d['BPM']))), Math.abs(d3.max(stats, d => parseFloat(d['BPM']))));
     const realisticMaxBLK = 10; 
+    const realisticMaxSTL = 3; 
     // Adjust normalization for each stat
     Object.keys(maxStats).forEach(key => {
         let value = parseFloat(playerStats[key]);
         switch (key) {
+            case 'STL%':
+                radarStats[key] = Math.min(value / realisticMaxSTL * 100, 100);
             case 'BLK%':
                 radarStats[key] = 100 - Math.min(value / realisticMaxBLK * 100, 100);
                 break;
@@ -236,6 +239,10 @@ function DrawRadarChart() {
         .attr("class", "line")
         .style("stroke", "black")
         .style("stroke-width", "2px");
+    
+    // Define an additional offset to push the labels outwards
+    const labelRadiusOffset = 20;  // Additional pixels to push the labels outward
+
     axis.append("text")
         .attr("class", "legend")
         .text(d => d)
@@ -244,20 +251,11 @@ function DrawRadarChart() {
         .attr("text-anchor", "middle")
         .attr("dy", "1.5em")
         .attr("transform", (d, i) => "translate(0, -10)")
-        .attr("x", (d, i) => radius * Math.cos(Math.PI * 2 * i / total))
-        .attr("y", (d, i) => radius * Math.sin(Math.PI * 2 * i / total));
-    axis.append("text")
-            .attr("class", "legend")
-            .text(d => d)
-            .style("font-family", "sans-serif")
-            .style("font-size", "12px")
-            .attr("text-anchor", "middle")
-            .attr("dy", "1.5em")
-            .attr("transform", (d, i) => "translate(0, -10)")
-            .attr("x", (d, i) => radius * Math.cos(Math.PI * 2 * i / total))
-            .attr("y", (d, i) => radius * Math.sin(Math.PI * 2 * i / total))
-            .append("title")  // Append title element for tooltip
-            .text(d => tooltips[d]);  // Set tooltip text based on the tooltips object
+        .attr("x", (d, i) => (radius + labelRadiusOffset) * Math.cos(Math.PI * 2 * i / total))  // Add labelRadiusOffset to the radius
+        .attr("y", (d, i) => (radius + labelRadiusOffset) * Math.sin(Math.PI * 2 * i / total))  // Add labelRadiusOffset to the radius
+        .append("title")  // Append title element for tooltip
+        .text(d => tooltips[d]);  // Set tooltip text based on the tooltips object
+
 
     // Draw radar chart polygons
     const dataValues = [];

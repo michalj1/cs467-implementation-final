@@ -4,72 +4,95 @@
     <meta charset="UTF-8">
     <title>NBA Player Stats</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <select id="season_select">
-        <option value="All">All Seasons</option>
-        <option value="1997">1997</option>
-        <option value="1998">1998</option>
-        <option value="1999">1999</option>
-        <option value="2000">2000</option>
-        <option value="2001">2001</option>
-        <option value="2002">2002</option>
-        <option value="2003">2003</option>
-        <option value="2004">2004</option>
-        <option value="2005">2005</option>
-        <option value="2006">2006</option>
-        <option value="2007">2007</option>
-        <option value="2008">2008</option>
-        <option value="2009">2009</option>
-        <option value="2010">2010</option>
-        <option value="2011">2011</option>
-        <option value="2012">2012</option>
-        <option value="2013">2013</option>
-        <option value="2014">2014</option>
-        <option value="2015">2015</option>
-        <option value="2016">2016</option>
-        <option value="2017">2017</option>
-        <option value="2018">2018</option>
-        <option value="2019">2019</option>
-        <option value="2020">2020</option>
-    </select>
-    <select id="team_select">
-        <option value="All">All Teams</option>
-        <option value="Atlanta Hawks">Atlanta Hawks</option>
-        <option value="Boston Celtics">Boston Celtics</option>
-        <option value="Brooklyn Nets">Brooklyn Nets</option>
-        <option value="Charlotte Hornets">Charlotte Hornets</option>
-        <option value="Chicago Bulls">Chicago Bulls</option>
-        <option value="Cleveland Cavaliers">Cleveland Cavaliers</option>
-        <option value="Dallas Mavericks">Dallas Mavericks</option>
-        <option value="Denver Nuggets">Denver Nuggets</option>
-        <option value="Detroit Pistons">Detroit Pistons</option>
-        <option value="Golden State Warriors">Golden State Warriors</option>
-        <option value="Houston Rockets">Houston Rockets</option>
-        <option value="Indiana Pacers">Indiana Pacers</option>
-        <option value="LA Clippers">LA Clippers</option>
-        <option value="Los Angeles Lakers">Los Angeles Lakers</option>
-        <option value="Memphis Grizzlies">Memphis Grizzlies</option>
-        <option value="Miami Heat">Miami Heat</option>
-        <option value="Milwaukee Bucks">Milwaukee Bucks</option>
-        <option value="Minnesota Timberwolves">Minnesota Timberwolves</option>
-        <option value="New Orleans Pelicans">New Orleans Pelicans</option>
-        <option value="New York Knicks">New York Knicks</option>
-        <option value="Oklahoma City Thunder">Oklahoma City Thunder</option>
-        <option value="Orlando Magic">Orlando Magic</option>
-        <option value="Philadelphia 76ers">Philadelphia 76ers</option>
-        <option value="Phoenix Suns">Phoenix Suns</option>
-        <option value="Portland Trail Blazers">Portland Trail Blazers</option>
-        <option value="Sacramento Kings">Sacramento Kings</option>
-        <option value="San Antonio Spurs">San Antonio Spurs</option>
-        <option value="Toronto Raptors">Toronto Raptors</option>
-        <option value="Utah Jazz">Utah Jazz</option>
-        <option value="Washington Wizards">Washington Wizards</option>
-    </select>
-    <select id="player_select" class="player"></select>
-    <div id="shot_container"></div>
-    <div id="radar_chart"></div>
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <select id="season_select" class="form-control">
+                    <option value="All">All Seasons</option>
+                    <option value="1997">1997</option>
+                    <option value="1998">1998</option>
+                    <option value="1999">1999</option>
+                    <option value="2000">2000</option>
+                    <option value="2001">2001</option>
+                    <option value="2002">2002</option>
+                    <option value="2003">2003</option>
+                    <option value="2004">2004</option>
+                    <option value="2005">2005</option>
+                    <option value="2006">2006</option>
+                    <option value="2007">2007</option>
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select id="team_select" class="form-control">
+                    <option value="All">All Teams</option>
+                    <option value="Atlanta Hawks">Atlanta Hawks</option>
+                    <option value="Boston Celtics">Boston Celtics</option>
+                    <option value="Brooklyn Nets">Brooklyn Nets</option>
+                    <option value="Charlotte Hornets">Charlotte Hornets</option>
+                    <option value="Chicago Bulls">Chicago Bulls</option>
+                    <option value="Cleveland Cavaliers">Cleveland Cavaliers</option>
+                    <option value="Dallas Mavericks">Dallas Mavericks</option>
+                    <option value="Denver Nuggets">Denver Nuggets</option>
+                    <option value="Detroit Pistons">Detroit Pistons</option>
+                    <option value="Golden State Warriors">Golden State Warriors</option>
+                    <option value="Houston Rockets">Houston Rockets</option>
+                    <option value="Indiana Pacers">Indiana Pacers</option>
+                    <option value="LA Clippers">LA Clippers</option>
+                    <option value="Los Angeles Lakers">Los Angeles Lakers</option>
+                    <option value="Memphis Grizzlies">Memphis Grizzlies</option>
+                    <option value="Miami Heat">Miami Heat</option>
+                    <option value="Milwaukee Bucks">Milwaukee Bucks</option>
+                    <option value="Minnesota Timberwolves">Minnesota Timberwolves</option>
+                    <option value="New Orleans Pelicans">New Orleans Pelicans</option>
+                    <option value="New York Knicks">New York Knicks</option>
+                    <option value="Oklahoma City Thunder">Oklahoma City Thunder</option>
+                    <option value="Orlando Magic">Orlando Magic</option>
+                    <option value="Philadelphia 76ers">Philadelphia 76ers</option>
+                    <option value="Phoenix Suns">Phoenix Suns</option>
+                    <option value="Portland Trail Blazers">Portland Trail Blazers</option>
+                    <option value="Sacramento Kings">Sacramento Kings</option>
+                    <option value="San Antonio Spurs">San Antonio Spurs</option>
+                    <option value="Toronto Raptors">Toronto Raptors</option>
+                    <option value="Utah Jazz">Utah Jazz</option>
+                    <option value="Washington Wizards">Washington Wizards</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select id="player_select" class="form-control player">
+                    <!-- Player options will be dynamically populated -->
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Shot Chart</h2>
+                <div id="shot_container" style="height: 300px;"></div>
+            </div>
+            <div class="col-md-6">
+                <h2>Player Statistics Radar Chart</h2>
+                <div id="radar_chart" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
     <div id="tooltip" style="position: absolute; display: none; padding: 10px; background: rgba(0,0,0,0.6); color: #fff; border-radius: 5px; font-size: 12px;"></div>
 
     <script src="static/script.js"></script>
