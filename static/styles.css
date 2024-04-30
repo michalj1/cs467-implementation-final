@@ -1,3 +1,13 @@
 body {
     text-align: center;
 }
+
+#tooltip {
+    position: absolute;
+    display: none;
+    padding: 10px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border-radius: 5px;
+    font-size: 12px;
+}

@@ -2,3 +2,5 @@ data/players/*.csv
 data/shots/*.csv
 data/*.csv
 data/*.zip
+myenv
+static/data/*.csv
