@@ -1,0 +1,1 @@
+unzip Archive.zip in static/data to get the csvs

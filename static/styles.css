@@ -14,7 +14,7 @@ body {
 }
 
 .visualization {
-    margin: 0 20px; /* Adds spacing between the visualizations */
+    margin: 0px; /* Adds spacing between the visualizations */
 }
 
 #tooltip {
@@ -27,7 +27,6 @@ body {
     font-size: 12px;
 }
 
-#shot_container, #radar_chart {
-    width: 500px; /* Set a specific width for each container */
-    height: 300px; /* Set a specific height for each container */
+#shot_container, #radar_chart, #stat_progression_container {
+    width: 100%; /* This will make the divs take full width of their containers */
 }

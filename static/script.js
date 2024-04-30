@@ -200,8 +200,8 @@ function DrawRadarChart() {
 
     // Define radar chart parameters
     const radarChartOptions = {
-        w: 300,
-        h: 300,
+        w: 200,
+        h: 200,
         margin: { top: 50, right: 50, bottom: 50, left: 50 },
         maxValue: 100,
         levels: 5,
@@ -319,7 +319,67 @@ function DrawRadarChart() {
         });
 }
 
+async function DrawStatProgression() {
+    const selectedPlayer = document.getElementById('player_select').value;
+    const selectedStat = document.getElementById('stat_select').value;
+
+    // Filter the data for the selected player and prepare the data for the line graph
+    const filteredData = stats.filter(d => d['year-name'].split('-')[1] === selectedPlayer)
+                              .map(d => ({
+                                  year: d.year,
+                                  value: parseFloat(d[selectedStat])
+                              }));
+
+    // Set the dimensions and margins of the graph
+    const margin = { top: 20, right: 30, bottom: 40, left: 50 },
+    width = 600
+    height = 200
+
+    // Remove any previous SVG to avoid overlapping graphs
+    d3.select("#stat_progression_container").selectAll("*").remove();
+
+    // Append the svg object to the body of the page
+    const svg = d3.select("#stat_progression_container")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Add X axis --> it is a date format
+    const x = d3.scaleLinear()
+      .domain(d3.extent(filteredData, d => d.year))
+      .range([ 0, width ]);
+    svg.append("g")
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x).tickFormat(d3.format("d")));
+
+    // Add Y axis
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(filteredData, d => d.value)])
+      .range([ height, 0 ]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+    // Add the line
+    svg.append("path")
+      .datum(filteredData)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(d => x(d.year))
+        .y(d => y(d.value))
+      );
+}
+
+// Add event listeners to redraw the graph when selections change
+document.getElementById('player_select').addEventListener('change', DrawStatProgression);
+document.getElementById('stat_select').addEventListener('change', DrawStatProgression);
+
+// Initial call to populate graph
 PopulateDropdowns().then(() => {
     DrawCourt();
     DrawRadarChart();
+    DrawStatProgression();  // Ensure this function is called after the dropdowns are populated
 });
