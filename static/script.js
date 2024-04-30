@@ -166,9 +166,34 @@ function DrawRadarChart() {
         'WS': parseFloat(playerStats['WS']),
         'BPM': parseFloat(playerStats['BPM'])
     };
+    const bpmRange = Math.max(Math.abs(d3.min(stats, d => parseFloat(d['BPM']))), Math.abs(d3.max(stats, d => parseFloat(d['BPM']))));
+    const realisticMaxBLK = 10; 
+    // Adjust normalization for each stat
     Object.keys(maxStats).forEach(key => {
-        radarStats[key] = parseFloat(playerStats[key]) / maxStats[key] * 100; // Normalize and scale to 100
+        let value = parseFloat(playerStats[key]);
+        switch (key) {
+            case 'BLK%':
+                radarStats[key] = 100 - Math.min(value / realisticMaxBLK * 100, 100);
+                break;
+            case 'BPM':
+                // Normalize BPM from -bpmRange to +bpmRange to a scale from 0 to 100
+                radarStats[key] = (value + bpmRange) / (2 * bpmRange) * 100;
+                break;
+            case 'Age':
+                // Inverse because lower Age is better
+                radarStats[key] = 100 - (value / maxStats[key] * 100);
+                break;
+            case 'TOV%':
+                // Inverse because lower TOV% is better
+                radarStats[key] = 100 - (value / maxStats[key] * 100);
+                break;
+            default:
+                // Normalization for other stats where higher is better
+                radarStats[key] = (value / maxStats[key]) * 100;
+                break;
+        }
     });
+
 
     // Define radar chart parameters
     const radarChartOptions = {
