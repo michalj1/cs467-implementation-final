@@ -135,12 +135,38 @@ function DrawRadarChart() {
     const seasonSelect = document.getElementById('season_select');
     const selectedPlayer = playerSelect.value;
 
-    // Filter stats based on selected player
-    const playerStats = stats.find(item => item['year-name'].split('-')[1] === selectedPlayer && (seasonSelect.value === 'All' || item['year-name'].startsWith(seasonSelect.value)));
-    if (!playerStats) {
+    // Gather all stats for the selected player, filtered by season if specified
+    const filteredStats = stats.filter(item => {
+        return item['year-name'].split('-')[1] === selectedPlayer &&
+               (seasonSelect.value === 'All' || item['year-name'].startsWith(seasonSelect.value));
+    });
+
+    if (!filteredStats.length) {
         console.log("No stats available for selected player or season");
         return;
     }
+
+    // Compute average stats if 'All' seasons are selected
+    let playerStats = {};
+    if (seasonSelect.value === 'All') {
+        const statSum = {};
+        filteredStats.forEach(stat => {
+            Object.keys(stat).forEach(key => {
+                if (!statSum[key]) {
+                    statSum[key] = [];
+                }
+                if (!isNaN(parseFloat(stat[key]))) {
+                    statSum[key].push(parseFloat(stat[key]));
+                }
+            });
+        });
+        Object.keys(statSum).forEach(key => {
+            playerStats[key] = statSum[key].reduce((acc, cur) => acc + cur, 0) / statSum[key].length;
+        });
+    } else {
+        playerStats = filteredStats[0]; // Use the first item if a specific season is selected
+    }
+
     // Define tooltips for each statistic
     const tooltips = {
         'Age': "Player's age on February 1 of the season",
@@ -152,16 +178,17 @@ function DrawRadarChart() {
         'USG%': "Usage Percentage: An estimate of the percentage of team plays used by a player while they were on the floor.",
         'BPM': "Box Plus/Minus: A box score estimate of the points per 100 possessions a player contributed above a league-average player, translated to an average team."
     };
-    // Extract relevant stats for radar chart
+
+    // Prepare data for the radar chart
     const radarStats = {
-        'Age': parseFloat(playerStats['Age']),
-        'TS%': parseFloat(playerStats['TS%']),
-        'AST%': parseFloat(playerStats['AST%']),
-        'STL%': parseFloat(playerStats['STL%']),
-        'BLK%': parseFloat(playerStats['BLK%']),
-        'TOV%': parseFloat(playerStats['TOV%']),
-        'USG%': parseFloat(playerStats['USG%']),
-        'BPM': parseFloat(playerStats['BPM'])
+        'Age': playerStats['Age'],
+        'TS%': playerStats['TS%'],
+        'AST%': playerStats['AST%'],
+        'STL%': playerStats['STL%'],
+        'BLK%': playerStats['BLK%'],
+        'TOV%': playerStats['TOV%'],
+        'USG%': playerStats['USG%'],
+        'BPM': playerStats['BPM']
     };
     const bpmRange = Math.max(Math.abs(d3.min(stats, d => parseFloat(d['BPM']))), Math.abs(d3.max(stats, d => parseFloat(d['BPM']))));
     const realisticMaxBLK = 10; 

@@ -3,30 +3,35 @@ body {
 }
 
 #selectors {
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Reduced margin */
 }
 
 .visualizations {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin-top: 20px;
+    margin-top: 10px; /* Reduced margin */
 }
 
 .visualization {
-    margin: 0px; /* Adds spacing between the visualizations */
+    margin: 5px; /* Reduced margin */
 }
 
 #tooltip {
     position: absolute;
     display: none;
-    padding: 10px;
+    padding: 5px; /* Reduced padding */
     background: rgba(0,0,0,0.6);
     color: #fff;
     border-radius: 5px;
     font-size: 12px;
 }
 
-#shot_container, #radar_chart, #stat_progression_container {
-    width: 100%; /* This will make the divs take full width of their containers */
+#radar_chart, #stat_progression_container {
+    height: 250px; /* Reduced height */
 }
+
+#shot_container {
+    height: 550px; /* Adjusted height for better fit */
+}
+

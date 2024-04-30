@@ -82,35 +82,43 @@
                 </select>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2>Player Statistics Radar Chart</h2>
-                        <div id="radar_chart" style="height: 300px;"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Left Column for Radar Chart and Stat Progression -->
+                <div class="col-md-6">
+                    <!-- Player Statistics Radar Chart -->
+                    <div class="row">
+                        <div class="col-md-24">
+                            <h2>Player Statistics Radar Chart</h2>
+                            <div id="radar_chart" style="height: 300px;"></div>
+                        </div>
                     </div>
-                    <div class="col-md-12">
-                        <h2>Player Stat Progression</h2>
-                        <select id="stat_select" class="form-control mb-3">
-                            <option value="Age" title="Player's age on February 1 of the season">Age</option>
-                            <option value="TS%" title="True Shooting Percentage: A measure of shooting efficiency that takes into account 2-point field goals, 3-point field goals, and free throws.">True Shooting Percentage (TS%)</option>
-                            <option value="AST%" title="Assist Percentage: An estimate of the percentage of teammate field goals a player assisted while they were on the floor.">Assist Percentage (AST%)</option>
-                            <option value="STL%" title="Steal Percentage: An estimate of the percentage of opponent possessions that end with a steal by the player while they were on the floor.">Steal Percentage (STL%)</option>
-                            <option value="BLK%" title="Block Percentage: An estimate of the percentage of opponent two-point field goal attempts blocked by the player while they were on the floor.">Block Percentage (BLK%)</option>
-                            <option value="TOV%" title="Turnover Percentage: An estimate of turnovers committed per 100 plays.">Turnover Percentage (TOV%)</option>
-                            <option value="USG%" title="Usage Percentage: An estimate of the percentage of team plays used by a player while they were on the floor.">Usage Percentage (USG%)</option>
-                            <option value="WS" title="Win Shares: An estimate of the number of wins contributed by a player.">Win Shares (WS)</option>
-                        </select>
-                        
-                        <div id="stat_progression_container" style="height: 300px;"></div>
+                    <!-- Player Stat Progression -->
+                    <div class="row">
+                        <div class="col-md-24">
+                            <h2>Player Stat Progression</h2>
+                            <select id="stat_select" class="form-control mb-3">
+                                <option value="Age" title="Player's age on February 1 of the season">Age</option>
+                                <option value="TS%" title="True Shooting Percentage: A measure of shooting efficiency that takes into account 2-point field goals, 3-point field goals, and free throws.">True Shooting Percentage (TS%)</option>
+                                <option value="AST%" title="Assist Percentage: An estimate of the percentage of teammate field goals a player assisted while they were on the floor.">Assist Percentage (AST%)</option>
+                                <option value="STL%" title="Steal Percentage: An estimate of the percentage of opponent possessions that end with a steal by the player while they were on the floor.">Steal Percentage (STL%)</option>
+                                <option value="BLK%" title="Block Percentage: An estimate of the percentage of opponent two-point field goal attempts blocked by the player while they were on the floor.">Block Percentage (BLK%)</option>
+                                <option value="TOV%" title="Turnover Percentage: An estimate of turnovers committed per 100 plays.">Turnover Percentage (TOV%)</option>
+                                <option value="USG%" title="Usage Percentage: An estimate of the percentage of team plays used by a player while they were on the floor.">Usage Percentage (USG%)</option>
+                                <option value="WS" title="Win Shares: An estimate of the number of wins contributed by a player.">Win Shares (WS)</option>
+                            </select>
+                            <div id="stat_progression_container" style="height: 300px;"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <h2>Shot Chart</h2>
-                <div id="shot_container" style="height: 600px;"></div>
+                <!-- Right Column for Shot Chart -->
+                <div class="col-md-6">
+                    <h2>Shot Chart</h2>
+                    <div id="shot_container" style="height: 600px;"></div>
+                </div>
             </div>
         </div>
+        
     </div>
     <div id="tooltip" style="position: absolute; display: none; padding: 10px; background: rgba(0,0,0,0.6); color: #fff; border-radius: 5px; font-size: 12px;"></div>
 
