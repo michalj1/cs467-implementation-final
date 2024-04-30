@@ -5,8 +5,8 @@ body {
 .logo-header {
     display: flex;
     justify-content: center;
-    margin-top: 10px; /* Maintain top margin */
-    padding-bottom: 20px; /* Add padding at the bottom before selectors */
+    margin-top: 5px; /* Maintain top margin */
+    padding-bottom: 10px; /* Add padding at the bottom before selectors */
 }
 
 .logo-header img {

@@ -230,7 +230,7 @@ function DrawRadarChart() {
         maxValue: 100,
         levels: 5,
         roundStrokes: true,
-        color: d3.scaleOrdinal().range(["#FF6347"])
+        color: d3.scaleOrdinal().range(["#89CFF0"])
     };
 
     // Remove existing radar chart if any
